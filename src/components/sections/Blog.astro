@@ -1,0 +1,125 @@
+---
+import { getBlogPosts } from '../../data/blog';
+
+const posts = (await getBlogPosts()).slice(0, 6);
+---
+
+<section id="portfolio" class="portfolio-section">
+  <div class="window-border portfolio-window">
+    
+    <div class="portfolio-content">
+      <div class="portfolio-header">
+        <h2>BLOGS</h2>
+        <p class="subtitle">/bin/PERSONAL/BLOGS</p>
+      </div>
+      <div class="projects-grid">
+        {posts.map((post) => (
+          <a href={`/blog/${post.year}/${post.month}/${post.slug}`} class="project-window">
+            
+            <div class="project-content">
+              <img class="thumbnail" src={post.thumbnail} alt={post.title} loading="lazy" />
+              <div class="project-info">
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <div class="tags">
+                  {post.tags.map((tag) => (
+                    <span class="tag window-border">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio-section {
+    padding: 2rem;
+  }
+
+  .portfolio-window {
+    background: #e5e5e5;
+  }
+
+  .portfolio-content {
+    padding: 2rem;
+  }
+
+  .portfolio-header {
+    margin-bottom: 3rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1.5rem;
+  }
+
+  .portfolio-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  a.project-window {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .project-window {
+    border: 2px solid #000;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .project-window:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 #000;
+  }
+
+  .project-content {
+    padding: 1.5rem;
+  }
+
+  .thumbnail {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 2px solid #000;
+    display: block;
+  }
+
+  .project-info h3 {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-info p {
+    font-size: 0.8125rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.6875rem;
+    background: #e5e5e5;
+  }
+</style>

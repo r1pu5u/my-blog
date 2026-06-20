@@ -1,0 +1,101 @@
+---
+const aboutItems = [
+  {
+    title: 'CYBERSECURITY',
+    description: 'Security researcher focused on discovering and understanding vulnerabilities in real-world applications.',
+  },
+  {
+    title: 'WEB SECURITY',
+    description: 'Specialized in business logic vulnerabilities, access control issues, reconnaissance, and JavaScript analysis.',
+  },
+  {
+    title: 'MOBILE SECURITY',
+    description: 'Exploring Android application security through reverse engineering, runtime analysis, and application testing.',
+  },
+  {
+    title: 'BUG BOUNTY',
+    description: 'Actively hunting for vulnerabilities in web and mobile applications through bug bounty programs.',
+  },
+];
+---
+
+<section id="about" class="about-section">
+  <div class="window-border about-window">
+    
+    <div class="about-content">
+      <div class="about-header">
+        <h2>WHOIS RIO PUTRA SURYANA</h2>
+        <p class="subtitle">Cybersecurity Researcher & Full Stack Developer</p>
+      </div>
+      <div class="about-grid">
+        {aboutItems.map((item) => (
+          <div class="about-card">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    padding: 2rem;
+  }
+
+  .about-window {
+    background: #e5e5e5;
+  }
+
+  .about-content {
+    padding: 2rem;
+  }
+
+  .about-header {
+    margin-bottom: 3rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1.5rem;
+  }
+
+  .about-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    color: #666;
+    font-weight: 700;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .about-card {
+    border: 2px solid #000;
+    padding: 1.5rem;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .about-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 #000;
+  }
+
+  .about-card h3 {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.5rem;
+  }
+
+  .about-card p {
+    font-size: 0.8125rem;
+    color: #333;
+  }
+</style>

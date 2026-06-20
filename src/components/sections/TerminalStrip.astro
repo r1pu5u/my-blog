@@ -1,0 +1,66 @@
+---
+---
+
+<section class="terminal-strip">
+  <div class="terminal-header">
+    <span>/bin/PORTFOLIO/PROFILE</span>
+  </div>
+  <div class="terminal-body">
+    <p class="command">COMMAND TO EXPLORE EXCLUSIVE CONTENT</p>
+    <div class="prompt">
+      <span class="prompt-symbol">></span>
+      <span class="cursor">_</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .terminal-strip {
+    background: #000;
+    border: 2px solid #000;
+    border-top: 4px solid #000;
+    margin: 2rem;
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .terminal-header {
+    background: #dadbd5;
+    border-bottom: 2px solid #000;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+  }
+
+  .terminal-body {
+    padding: 2rem;
+    color: #fff;
+  }
+
+  .command {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .prompt {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .prompt-symbol {
+    color: #00ff00;
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>

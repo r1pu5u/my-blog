@@ -1,0 +1,363 @@
+
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Navbar from '../../../../components/sections/Navbar.astro';
+import Footer from '../../../../components/sections/Footer.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  return posts.map((post) => {
+    const [year, month] = post.data.date.split('-');
+
+    return {
+      params: {
+        year,
+        month,
+        slug: post.slug ?? post.id,
+      },
+      props: {
+        id: post.id,
+      },
+    };
+  });
+}
+
+const { id } = Astro.props;
+
+const post = await getEntry('blog', id);
+
+if (!post) {
+  throw new Error(`Post not found: ${id}`);
+}
+
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} | Blog | RIO_PERSONAL_WEB`} description={post.data.excerpt} image={post.data.thumbnail}>
+  <div class="desktop-background"></div>
+
+  <Navbar />
+
+  <div class="main-container window-border" style="margin-top: 70px;">
+    <div class="post-content">
+      <div class="window-border post-window">
+        <div class="post-body">
+          <div class="post-meta-bar">
+            <span class="meta-date">[{post.data.date}]</span>
+            <span class="meta-category">{post.data.category}</span>
+          </div>
+
+          {
+            post.data.thumbnail && (
+              <div class="post-thumbnail">
+                <img
+                  src={post.data.thumbnail}
+                  alt={post.data.title}
+                />
+              </div>
+            )
+          }
+
+          <article class="article-content">
+            <h1>{post.data.title}</h1>
+
+            {
+              post.data.excerpt && (
+                <p class="post-excerpt">
+                  {post.data.excerpt}
+                </p>
+              )
+            }
+
+            <div class="content-body">
+              <Content />
+            </div>
+          </article>
+
+          {
+            post.data.tags && post.data.tags.length > 0 && (
+              <div class="post-tags-section">
+                <span class="tags-label">TAGS:</span>
+
+                <div class="post-tags">
+                  {post.data.tags.map((tag) => (
+                    <span class="post-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          <div class="post-navigation">
+            <a href="/blog" class="back-link">
+              ← BACK_TO_BLOG
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Footer />
+  </div>
+</Layout>
+
+<style>
+  .desktop-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0c0c0c;
+    background-image:
+      linear-gradient(rgba(34, 34, 34, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 34, 34, 0.5) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+  }
+
+  .main-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 70px auto 0 auto;
+    background: #e5e5e5;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .post-content {
+    padding: 2rem;
+  }
+
+  .post-window {
+    background: #fff;
+  }
+
+  .post-body {
+    padding: 2rem;
+  }
+
+  .post-meta-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .meta-date {
+    color: #666;
+  }
+
+  .meta-category {
+    background: #000;
+    color: #fff;
+    padding: 0.125rem 0.5rem;
+  }
+
+  .post-thumbnail {
+    width: 100%;
+    aspect-ratio: 21/9;
+    overflow: hidden;
+    border: 2px solid #000;
+    margin-bottom: 2rem;
+    background: #000;
+  }
+
+  .post-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(1.1);
+  }
+
+  .article-content {
+    font-family: "IBM Plex Mono", monospace;
+  }
+
+  .article-content h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .post-excerpt {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #000;
+  }
+
+  .content-body :global(h2) {
+    font-size: 1.25rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.5rem;
+  }
+
+  .content-body :global(h3) {
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .content-body :global(p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #222;
+  }
+
+  .content-body :global(ul),
+  .content-body :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content-body :global(li) {
+    margin-bottom: 0.5rem;
+    color: #222;
+  }
+
+  .content-body :global(pre) {
+    background: #0c0c0c;
+    color: #00ff00;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    border: 2px solid #000;
+  }
+
+  .content-body :global(code) {
+    background: #e5e5e5;
+    padding: 0.125rem 0.375rem;
+    font-size: 0.875rem;
+    border: 1px solid #000;
+  }
+
+  .content-body :global(pre code) {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .content-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    border: 2px solid #000;
+  }
+
+  .content-body :global(th) {
+    background: #000;
+    color: #fff;
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  .content-body :global(td) {
+    padding: 0.75rem;
+    border: 1px solid #000;
+  }
+
+  .content-body :global(blockquote) {
+    border-left: 4px solid #000;
+    padding-left: 1rem;
+    margin: 0 0 1.5rem 0;
+    color: #444;
+    font-style: italic;
+  }
+
+  .content-body :global(hr) {
+    border: none;
+    border-top: 2px solid #000;
+    margin: 2rem 0;
+  }
+
+  .post-tags-section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #000;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .tags-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .post-tag {
+    font-size: 0.75rem;
+    background: #e5e5e5;
+    padding: 0.25rem 0.75rem;
+    border: 2px solid #000;
+    font-weight: 700;
+  }
+
+  .post-navigation {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #000;
+  }
+
+  .back-link {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: #00ff00;
+  }
+
+  @media (max-width: 768px) {
+    .main-container {
+      width: 95%;
+    }
+
+    .post-content {
+      padding: 1rem;
+    }
+
+    .post-body {
+      padding: 1rem;
+    }
+
+    .article-content h1 {
+      font-size: 1.5rem;
+    }
+
+    .post-thumbnail {
+      aspect-ratio: 16 / 9;
+    }
+
+    .content-body :global(pre) {
+      padding: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+</style>

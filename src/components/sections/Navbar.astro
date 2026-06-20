@@ -1,0 +1,114 @@
+---
+---
+
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner window-border">
+    <div class="navbar-left">
+      <a href="/" class="logo-link">
+        <img class="logo" src="/assets/logo.png" alt="RIO_PERSONAL_WEB" />
+      </a>
+    </div>
+    <div class="navbar-right">
+      <ul class="nav-list">
+        <li><a href="/#services">SERVICES</a></li>
+        <li><a href="/#contact">CONTACT</a></li>
+        <li><a href="/#about">ABOUT</a></li>
+        <li><a href="/blog">BLOG</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  {  
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+      const handleScroll = () => {
+        if (window.scrollY > 0) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      };
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+  }
+</script>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    opacity: 0.6;
+  }
+
+  .navbar-inner {
+    background: #dadbd5;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8rem;
+  }
+
+  .logo {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .nav-list a {
+    position: relative;
+    padding: 0.25rem 0;
+  }
+
+  .nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width 0.3s ease;
+  }
+
+  .nav-list a:hover::after {
+    width: 100%;
+  }
+
+  .nav-list a:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .navbar-inner {
+      padding: 0 1rem;
+    }
+    .logo {
+      height: 30px;
+    }
+    .nav-list {
+      gap: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+</style>

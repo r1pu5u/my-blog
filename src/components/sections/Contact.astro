@@ -1,0 +1,246 @@
+---
+const contactInfo = [
+  { label: 'LINKEDIN', value: 'linkedin.com/in/rio-putra-suryana', href: 'https://linkedin.com/in/rio-putra-suryana' },
+  { label: 'TWITTER', value: '@RioPutr4Suryana', href: 'https://x.com/RioPutr4Suryana' },
+  { label: 'HACKERONE', value: 'hackerone.com/r1pu5u', href: 'https://hackerone.com/r1pu5u' },
+  { label: 'GITHUB', value: 'github.com/r1pu5u', href: 'https://github.com/r1pu5u' },
+];
+---
+
+<section id="contact" class="contact-section">
+  <div class="window-border contact-window">
+    <div class="contact-content">
+      <div class="contact-header">
+        <h2>TERMINAL_READY</h2>
+        <p class="subtitle">Waiting for input...</p>
+      </div>
+      <div class="terminal-interface">
+        <div class="terminal-line">
+          <span class="prompt">$</span>
+          <span class="command-text">contact --show</span>
+        </div>
+        <div class="output">
+          {contactInfo.map((item) => (
+            <a href={item.href} class="contact-row" target={item.href.startsWith('http') ? '_blank' : undefined} rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}>
+              <span class="label">{item.label}</span>
+              <span class="value">{item.value}</span>
+            </a>
+          ))}
+        </div>
+        <div class="terminal-line active">
+          <span class="prompt">$</span>
+          <span class="cursor">_</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.contact-window {
+  background: #000;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-content {
+  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contact-header {
+  margin-bottom: 3rem;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 1.5rem;
+  color: #fff;
+}
+
+.contact-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.terminal-interface {
+  font-family: "IBM Plex Mono", monospace;
+  color: #fff;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.terminal-line {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  min-width: 0;
+}
+
+.prompt {
+  color: #00ff00;
+  flex-shrink: 0;
+}
+
+.command-text {
+  color: #dadbd5;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid #333;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #333;
+  transition: all 0.3s ease;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.contact-row:hover {
+  padding-left: 1rem;
+  border-left: 2px solid #00ff00;
+  color: #00ff00;
+}
+
+.label {
+  color: #666;
+  font-size: 0.875rem;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.value {
+  color: #fff;
+  font-size: 0.875rem;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+.active {
+  margin-top: 2rem;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 0.75rem;
+  }
+
+  .contact-content {
+    padding: 1rem;
+  }
+
+  .contact-header {
+    margin-bottom: 2rem;
+  }
+
+  .contact-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .output {
+    padding-left: 0.75rem;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: flex-start;
+  }
+
+  .contact-row:hover {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .value {
+    width: 100%;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 0.5rem;
+  }
+
+  .contact-content {
+    padding: 0.75rem;
+  }
+
+  .contact-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .terminal-line {
+    font-size: 0.875rem;
+  }
+
+  .output {
+    padding-left: 0.5rem;
+  }
+
+  .label,
+  .value {
+    font-size: 0.75rem;
+  }
+}
+</style>

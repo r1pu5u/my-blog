@@ -1,0 +1,118 @@
+---
+const services = [
+  {
+    title: 'WEB APPLICATION SECURITY TESTING',
+    description: 'Comprehensive security assessments including OWASP Top 10, business logic flaws, and API security testing.',
+  },
+  {
+    title: 'MOBILE APPLICATION SECURITY TESTING',
+    description: 'In-depth analysis of iOS and Android apps covering static analysis, dynamic testing, and reverse engineering.',
+  },
+  {
+    title: 'SOURCE CODE REVIEW',
+    description: 'Manual and automated code review identifying vulnerabilities in JavaScript, Python, Java, and other languages.',
+  },
+  {
+    title: 'SECURITY CONSULTING',
+    description: 'Architecture reviews, threat modeling, and security strategy development for organizations.',
+  },
+];
+---
+
+<section id="services" class="services-section">
+  <div class="window-border services-window">
+    
+    <div class="services-content">
+      <div class="services-header">
+        <h2>SERVICES</h2>
+        <p class="subtitle">Available security services</p>
+      </div>
+      <div class="services-list">
+        {services.map((service, index) => (
+          <div class="service-item">
+            <div class="service-number">0{index + 1}</div>
+            <div class="service-details">
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: 2rem;
+  }
+
+  .services-window {
+    background: #e5e5e5;
+  }
+
+  .services-content {
+    padding: 2rem;
+  }
+
+  .services-header {
+    margin-bottom: 3rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1.5rem;
+  }
+
+  .services-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .service-item {
+    display: flex;
+    gap: 2rem;
+    border: 2px solid #000;
+    padding: 2rem;
+    background: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-item:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 #000;
+  }
+
+  .service-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000;
+    min-width: 60px;
+    line-height: 1;
+  }
+
+  .service-details h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-details p {
+    font-size: 0.8125rem;
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .service-item {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>
