@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://r1pu5u.github.io/sitemap.xml
+Sitemap: https://r1pu5u.github.io/sitemap-index.xml
