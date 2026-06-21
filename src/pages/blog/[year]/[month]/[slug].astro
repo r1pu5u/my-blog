@@ -35,7 +35,7 @@ if (!post) {
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | Blog`} description={post.data.excerpt} image={`https://r1pu5u.github.io${post.data.thumbnail}`}>
+<Layout title={`${post.data.title} | Blog`} description={post.data.excerpt} image={`https://r1pu5u.github.io${post.data.thumbnail}`} url={`https://r1pu5u.github.io/blog/${post.data.date.split('-').slice(0, 2).join('/')}/${post.id}`}>
   <div class="desktop-background"></div>
 
   <Navbar />

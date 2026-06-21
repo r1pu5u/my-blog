@@ -12,6 +12,25 @@ const {
   image = '/assets/jumbotron-image.webp',
   url = 'https://r1pu5u.github.io',
 } = Astro.props;
+
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: title,
+  description,
+  image: [image],
+  url,
+  author: {
+    "@type": "Person",
+    name: "Rio Putra Suryana",
+    url: "https://r1pu5u.github.io"
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Rio Putra Suryana"
+  }
+};
 ---
 
 <!doctype html>
@@ -19,26 +38,40 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-    <meta name="google-site-verification" content="dVBImUWgMivd-_4g2fx1pELVC7YwM-2hqvJI0Z0CyWU" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Primary Meta -->
+    <title>{title}</title>
     <meta name="description" content={description} />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    
+    <link rel="canonical" href={url} />
+
+    
+    <meta name="robots" content="index, follow" />
+
+    
+    <meta name="author" content="Rio Putra Suryana" />
+
+
+
+    <meta property="og:type" content="article" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
     <meta property="og:url" content={url} />
+    <meta property="og:site_name" content="RIO_PERSONAL_OS" />
+    <meta property="og:locale" content="en_US" />
 
-
-    <!-- Twitter Card -->
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
 
     <!-- <link rel="icon" href="/favicon.ico" /> -->
@@ -59,3 +92,7 @@ const {
 <style>
   @import '../styles/global.css';
 </style>
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd)}
+  />
